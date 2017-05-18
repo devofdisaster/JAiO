@@ -1,0 +1,19 @@
+{
+  "name": "jaio",
+  "version": "0.0.5",
+  "description": "WYSIWYG app for JAiO",
+  "main": "web/index.php",
+  "dependencies": {
+
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:pwitko/jaio.git"
+  },
+  "author": "Piotr Witkowicki",
+  "license": "BSD-2-Clause"
+}

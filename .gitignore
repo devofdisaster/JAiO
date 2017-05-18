@@ -1,0 +1,7 @@
+/app/cache/
+/vendor/
+/.idea
+/web/.htaccess
+/composer.phar
+/node_modules/
+/development.log

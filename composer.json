@@ -1,0 +1,26 @@
+{
+    "name": "piotr/jaio",
+    "description": "Simple WYSIWYG app using Silex and React",
+    "type": "project",
+    "require": {
+        "silex/silex": "^2.1",
+        "silex/web-profiler": "^2.0",
+        "doctrine/dbal": "^2.5",
+        "dflydev/doctrine-orm-service-provider": "^2.0",
+        "symfony/config": "^3.2",
+        "symfony/yaml": "^3.2",
+        "symfony/translation": "^3.2",
+        "monolog/monolog": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "JAiO\\": "src/JAiO"
+        }
+    },
+    "authors": [
+        {
+            "name": "pwitko",
+            "email": "piotr.witkowicki@gmail.com"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+firewalls:
+    dev:
+        pattern: ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+    default:
+        anonymous: true
+        pattern: ^.*$
+        form:
+            login_path: /login
+            check_path: /auth
+            default_target_path: /account
+            username_parameter: login[username]
+            password_parameter: login[password]
+        logout:
+            logout_path: /logout
+            target_url: /account
+            invalidate_session: false
+        remember_me:
+            key: $2a$06$QpGwK.pU5afYer8NgqnjvOhuRXJ0jaVrKQnCKPHsOo4hZRMTUgkAC
+            remember_me_parameter: login[remember_me]
+            always_remember_me: true

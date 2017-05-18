@@ -1,0 +1,5 @@
+db:
+    name:
+    user:
+    password:
+    port: 3306
