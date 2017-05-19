@@ -1,51 +1,45 @@
 <?php
 namespace JAiO\Application;
 
-use Dflydev\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use JAiO\Application\Pages\PagesController;
-use JAiO\Config;
+use JAiO\CommonApplication;
 use Silex\Application;
 use Silex\Provider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class FrontendApplication extends Application
+class FrontendApplication extends CommonApplication
 {
-    use Application\UrlGeneratorTrait;
     use Application\TwigTrait;
 
     public function __construct($devEnv = false, array $params = [])
     {
-        parent::__construct($params);
-
-        $this['config'] = function () {
-            return new Config();
-        };
-
-        $this->registerCoreProviders();
-        $this->registerDoctrineProviders();
+        parent::__construct($devEnv, $params);
 
         if ($devEnv) {
             $this->register(new Provider\WebProfilerServiceProvider(), [
                 'profiler.cache_dir'    => ROOT_PATH . '/app/cache/profiler',
                 'profiler.mount_prefix' => '/_profiler'
             ]);
-            $this['debug'] = true;
         }
 
-        $this['pages.controller'] = function($container) {
+        $this['pages.controller'] = function ($container) : PagesController {
             return new PagesController($container);
         };
 
         $this->setupRoutes($devEnv);
     }
 
-    private function registerCoreProviders()
+    final protected function registerCoreProviders()
     {
+        parent::registerCoreProviders();
+
         $this->register(new Provider\HttpFragmentServiceProvider());
-        $this->register(new Provider\ServiceControllerServiceProvider());
         $this->register(new Provider\TwigServiceProvider(), [
-            'twig.path' => [ROOT_PATH . '/src/JAiO/Application', ROOT_PATH . '/src/JAiO/Resources/Views'],
+            'twig.path' => [
+                ROOT_PATH . '/src/JAiO/Application',
+                ROOT_PATH . '/src/JAiO/Infrastructure/Resources/Views'
+            ],
             'twig.options' => [
                 'debug' => $this['debug'],
                 'cache' => ROOT_PATH . '/app/cache',
@@ -53,57 +47,25 @@ class FrontendApplication extends Application
             ],
             'twig.form.templates' => ['jaio_bootstrap_3_horizontal_layout.html.twig']
         ]);
-        $this->register(new Provider\LocaleServiceProvider());
-        $this->register(new Provider\TranslationServiceProvider(), array(
-            'locale_fallbacks' => array('en'),
-        ));
-        $this->register(new Provider\MonologServiceProvider(), array(
-            'monolog.logfile' => ROOT_PATH . '/development.log',
-        ));
     }
 
-    private function registerDoctrineProviders()
-    {
-        $this->register(new Provider\DoctrineServiceProvider(), [
-            'db.options' => [
-                'driver' => 'pdo_mysql',
-                'dbname' => $this['config']->get('db.name'),
-                'user' => $this['config']->get('db.user'),
-                'password' => $this['config']->get('db.password'),
-                'port' => $this['config']->get('db.port'),
-                'charset' => 'utf8mb4'
-            ]
-        ]);
-
-        $this->register(new DoctrineOrmServiceProvider(), [
-            'orm.proxies_dir' => ROOT_PATH . '/app/cache',
-            'orm.em.options' => [
-                'mappings' => [
-                    [
-                        'type' => 'xml',
-                        'namespace' => 'JAiO\Frontend',
-                        'path' => ROOT_PATH . '/src/JAiO/Infrastructure/Resources/Mappings'
-                    ]
-                ]
-            ],
-            'orm.auto_generate_proxies' => true
-        ]);
-    }
-
-    private function setupRoutes($devEnv)
+    private function setupRoutes($devEnv) : void
     {
         $this->before(function (Request $request, FrontendApplication $container) {
             $controller = $container['resolver']->getController($request);
 
-            if (is_array($controller) && array_key_exists(0, $controller) && $controller instanceof FrontendController) {
-                return $controller[0]->preExecute();
+            if (is_array($controller)) {
+                if (array_key_exists(0, $controller) && $controller[0] instanceof FrontendController) {
+                    return $controller[0]->preExecute();
+                }
             }
         });
 
-        $this->match('/pages', 'pages.controller:IndexAction')->bind('pages');
+        $this->match('/pages', 'pages.controller:indexAction')->bind('pages');
+        $this->match('/pages/new', 'pages.controller:newAction')->bind('pages_new');
         $this->match('/{anything}', function (FrontendApplication $container) {
             return $container->redirect($container->url('pages'));
-        })->assert('anything', $devEnv ? '^((?!_profiler).*)$' : '.*');
+        })->assert('anything', $devEnv ? '^((?!_profiler|assets/).*)$' : '.*');
         $this->after(function (Request $request, Response $response) {
             $response->headers->addCacheControlDirective('no-cache', true);
             $response->headers->addCacheControlDirective('no-store', true);
