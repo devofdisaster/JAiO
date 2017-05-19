@@ -1,0 +1,7 @@
+#!/bin/bash
+./composer.phar install
+gulp
+rm -rf app/cache/*
+rm -f development.log
+
+
