@@ -1,8 +1,5 @@
-'use strict';
-
-var gulp    = require('gulp');
-var sass    = require('gulp-sass');
-var source  = require('vinyl-source-stream');
+const gulp = require('gulp')
+const sass  = require('gulp-sass')
 
 gulp.task('sass', function () {
     return gulp.src('web/assets/sass/*.scss')
@@ -15,4 +12,4 @@ gulp.task('js', function () {
         .pipe(gulp.dest('web/assets/js/dist'))
 });
 
-gulp.task('default', ['sass', 'js']);
+gulp.task('default', ['sass', 'js'])
