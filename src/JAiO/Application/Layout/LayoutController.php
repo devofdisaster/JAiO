@@ -1,5 +1,7 @@
 <?php
-namespace JAiO\Application;
+namespace JAiO\Application\Layout;
+
+use JAiO\Application\FrontendController;
 
 class LayoutController extends FrontendController
 {
