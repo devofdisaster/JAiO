@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:pwitko/jaio.git"
+    "url": "git@github.com:pwitko/jaio.git"
   },
   "author": "Piotr Witkowicki",
   "license": "BSD-2-Clause"
