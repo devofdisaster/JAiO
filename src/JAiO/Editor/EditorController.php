@@ -2,7 +2,10 @@
 
 namespace JAiO\Editor;
 
+use Doctrine\ORM\EntityRepository;
 use JAiO\Config;
+use JAiO\Domain\Page;
+use JAiO\Repository\PageRepository;
 
 class EditorController
 {
@@ -20,12 +23,34 @@ class EditorController
     {
     }
 
+    public function indexAction($uuid)
+    {
+        return $this->render($this->getPageByUuid($uuid));
+    }
+
+    /**
+     * @param $uuid
+     * @return Page|null
+     */
+    protected function getPageByUuid($uuid) : ?Page
+    {
+        return $this->getPageRepository()->find($uuid);
+    }
+
     /**
      * @return \Doctrine\ORM\EntityManager
      */
     protected function getEM()
     {
         return $this->app['orm.em'];
+    }
+
+    /**
+     * @return PageRepository|EntityRepository
+     */
+    protected function getPageRepository() : PageRepository
+    {
+        return $this->getRepository('Page');
     }
 
     protected function getRepository($name)
@@ -66,7 +91,6 @@ class EditorController
 
     protected function render($page)
     {
-        return $this->app->render('Editor/Templates/index.twig', ['page' => $page]);
+        return $this->app->render('Templates/Index.twig', ['page' => $page]);
     }
-
 }

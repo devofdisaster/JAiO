@@ -33,7 +33,7 @@ class PagesController extends LayoutController
     {
         $page = $this->getRepository('Page')->find($uuid);
 
-        return $this->redirect(sprintf('http://editor.jaio.dev/%s', $page->getUuid()));
+        return $this->app->redirect(sprintf('http://editor.jaio.dev/%s', $page->getUuid()));
     }
 
     final protected function render($template, $vars = [])

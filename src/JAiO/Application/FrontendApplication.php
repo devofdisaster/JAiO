@@ -63,7 +63,9 @@ class FrontendApplication extends CommonApplication
 
         $this->match('/pages', 'pages.controller:indexAction')->bind('pages');
         $this->match('/pages/new', 'pages.controller:newAction')->bind('pages_new');
-        $this->match('/edit', 'pages.controller:editAction')->bind('edit');
+        $this->match('/edit/{uuid}', 'pages.controller:editAction')
+            ->assert('uuid', '^.{36}$')
+            ->bind('edit');
         $this->match('/{anything}', function (FrontendApplication $container) {
             return $container->redirect($container->url('pages'));
         })->assert('anything', $devEnv ? '^((?!_profiler|assets/).*)$' : '.*');
