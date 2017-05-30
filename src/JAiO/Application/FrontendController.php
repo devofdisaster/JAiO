@@ -18,7 +18,6 @@ class FrontendController
 
     public function preExecute()
     {
-
     }
 
     /**

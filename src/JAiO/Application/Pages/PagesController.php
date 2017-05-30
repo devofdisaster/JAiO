@@ -10,19 +10,30 @@ class PagesController extends LayoutController
 {
     public function indexAction(Request $request)
     {
-        $pages = [];
-
-        return $this->render('Index', [$pages]);
+        return $this->render(
+            'Index',
+            ['pages' => $this->getRepository('Page')->findAll()]
+        );
     }
 
     public function newAction()
     {
-        $newPage = new Page('test page', json_encode(new Page\EmptyContent()));
+        $newPage = new Page(
+            sprintf('Page %s', (new \DateTime())->format('Y-m-d h:i:s')),
+            json_encode(new Page\EmptyContent())
+        );
 
         $this->getEM()->persist($newPage);
         $this->getEM()->flush();
 
         return $this->redirect('pages');
+    }
+
+    public function editAction($uuid)
+    {
+        $page = $this->getRepository('Page')->find($uuid);
+
+        return $this->redirect(sprintf('http://editor.jaio.dev/%s', $page->getUuid()));
     }
 
     final protected function render($template, $vars = [])

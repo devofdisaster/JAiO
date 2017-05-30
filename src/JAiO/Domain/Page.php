@@ -22,6 +22,14 @@ class Page
         $this->content = $content;
     }
 
+    /**
+     * @return Uuid
+     */
+    public function getUuid(): Uuid
+    {
+        return $this->uuid;
+    }
+
     public function getName() : string
     {
         return $this->name;
@@ -43,6 +51,11 @@ class Page
     public function render() : string
     {
         return $this->getBody()->render();
+    }
+
+    public function getUrl() : string
+    {
+        return sprintf('http://page.jaio.dev/%s', $this->uuid);
     }
 
     public function __toString() : string
