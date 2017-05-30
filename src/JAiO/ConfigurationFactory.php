@@ -3,6 +3,7 @@
 namespace JAiO;
 
 use JAiO\Application\FrontendApplication;
+use JAiO\Editor\EditorApplication;
 use JAiO\Page\PageApplication;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
@@ -23,10 +24,13 @@ class ConfigurationFactory
 
         $host = $_SERVER['HTTP_HOST'];
 
-        if ($host === 'app.jaio.dev') {
-            return new FrontendApplication($dev);
+        switch ($host) {
+            case 'app.jaio.dev':
+                return new FrontendApplication($dev);
+            case 'editor.jaio.dev':
+                return new EditorApplication($dev);
+            default:
+                return new PageApplication($dev);
         }
-
-        return new PageApplication($dev);
     }
 }
