@@ -16,13 +16,6 @@ class EditorApplication extends CommonApplication
     {
         parent::__construct($devEnv, $params);
 
-        if ($devEnv) {
-            $this->register(new Provider\WebProfilerServiceProvider(), [
-                'profiler.cache_dir'    => ROOT_PATH . '/app/cache/profiler',
-                'profiler.mount_prefix' => '/_profiler'
-            ]);
-        }
-
         $this['editor.controller'] = function ($container) : EditorController {
             return new EditorController($container);
         };

@@ -5,3 +5,4 @@
 /composer.phar
 /node_modules/
 /development.log
+/web/editor/dist/
