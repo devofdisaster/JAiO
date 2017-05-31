@@ -1,5 +1,6 @@
-import Application from './src/App';
+import App from './src/App';
 
 (function () {
-    (new Application()).init();
+    window.Application = new App(page)
+    window.Application.init()
 })();

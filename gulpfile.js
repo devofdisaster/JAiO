@@ -1,7 +1,8 @@
-const gulp = require('gulp')
-const sass  = require('gulp-sass')
-const browserify = require('browserify');
-const fs = require('fs');
+const browserify    = require('browserify');
+const fs            = require('fs');
+const gulp          = require('gulp')
+const sass          = require('gulp-sass')
+
 
 gulp.task('sass', function () {
     return gulp.src('web/assets/sass/*.scss')

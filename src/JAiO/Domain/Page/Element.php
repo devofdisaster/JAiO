@@ -58,21 +58,13 @@ abstract class Element
 
     protected function renderStyle() : string
     {
-        $queries = [];
+        $declarations = [];
 
-        foreach ($this->parameters->style as $mediaQuery => $styles) {
-            $query = $mediaQuery === 'default' ? '' : $mediaQuery;
-            $declarations = [];
-
-            foreach ($styles as $name => $value) {
-                $declarations[] = sprintf('%s:%s', $name, is_numeric($value) ? sprintf('%spx', $value) : $value);
-            }
-
-            $format = $query ? '%s{%s}' : '%s%s';
-            $queries[] = sprintf($format, $query, join(';', $declarations));
+        foreach ($this->parameters->style as $name => $value) {
+            $declarations[] = sprintf('%s:%s', $name, is_numeric($value) ? sprintf('%spx', $value) : $value);
         }
 
-        return sprintf('style="%s"', join(';', $queries));
+        return sprintf('style="%s"', join(';', $declarations));
     }
 
     public function __toString() : string
