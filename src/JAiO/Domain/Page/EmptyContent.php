@@ -11,11 +11,9 @@ class EmptyContent implements \JsonSerializable
             'attributes' => [],
             'parameters' => [
                 'style' => [
-                    'default' => [
-                        'background-color' => 'red',
-                        'color' => 'white',
-                        'font-weight' => 900
-                    ]
+                    'background-color' => 'red',
+                    'color' => 'white',
+                    'font-weight' => 900
                 ]
             ],
             'children' => [
@@ -24,11 +22,9 @@ class EmptyContent implements \JsonSerializable
                     'attributes' => [],
                     'parameters' => [
                         'style' => [
-                            'default' => [
-                                'background-color' => 'green',
-                                'width' => 100,
-                                'height' => 100
-                            ]
+                            'background-color' => 'green',
+                            'width' => 100,
+                            'height' => 100
                         ]
                     ]
                 ]

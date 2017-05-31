@@ -1,17 +1,14 @@
 class Attributes {
-
     constructor (object) {
         this.attributes = Object.assign({}, object)
     }
 
-    render() {
-        let attrs = []
+    toJSON() {
+        return this.attributes
+    }
 
-        for (const attr of this.attributes) {
-            attrs.push(`${attr}="${this.attributes[attr]}"`)
-        }
-
-        return attrs.join(' ');
+    toView() {
+        return this.attributes
     }
 }
 

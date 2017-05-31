@@ -54,9 +54,13 @@ class EditorApplication extends CommonApplication
             }
         });
 
+        $this->match('/page/{uuid}', 'editor.controller:pageJsonAction')
+            ->assert('uuid', '^.{36}$')
+            ->bind('json');
+
         $this->match('/{uuid}', 'editor.controller:indexAction')
             ->assert('uuid', '^.{36}$')
-            ->bind('pages');
+            ->bind('editor');
 
         $this->after(function (Request $request, Response $response) {
             $response->headers->addCacheControlDirective('no-cache', true);

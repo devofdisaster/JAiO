@@ -1,16 +1,14 @@
 class Style {
     constructor (object) {
-        this.properties = Object.assign({}, object);
+        this.properties = Object.assign({}, object)
     }
 
-    render() {
-        let props = [];
+    toJSON() {
+        return this.properties
+    }
 
-        for (const property of this.properties) {
-            props.push(`${property}:${this.properties[property]};`);
-        }
-
-        return `style="${props.join(' ')}"`;
+    toView() {
+        return this.properties
     }
 }
 

@@ -6,6 +6,8 @@ use Doctrine\ORM\EntityRepository;
 use JAiO\Config;
 use JAiO\Domain\Page;
 use JAiO\Repository\PageRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class EditorController
 {
@@ -23,9 +25,14 @@ class EditorController
     {
     }
 
-    public function indexAction($uuid)
+    public function indexAction($uuid) : Response
     {
         return $this->render($this->getPageByUuid($uuid));
+    }
+
+    public function pageJsonAction($uuid) : Response
+    {
+        return JsonResponse::fromJsonString($this->getPageByUuid($uuid)->getContent());
     }
 
     /**
