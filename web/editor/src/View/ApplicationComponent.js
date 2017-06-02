@@ -21,14 +21,8 @@ class ApplicationComponent extends React.Component {
         return (
             <div className="container-fluid">
                 <HeaderView source={this.state.ui.header}/>
-                <div className="row content">
-                    <div className="col-sm-10">
-                        <BodyView source={this.state.page}/>
-                    </div>
-                    <div className="col-sm-2">
-                        <SidebarView source={this.state.ui.sidebar}/>
-                    </div>
-                </div>
+                <SidebarView source={this.state.ui.sidebar}/>
+                <BodyView source={this.state.page}/>
             </div>
         )
     }

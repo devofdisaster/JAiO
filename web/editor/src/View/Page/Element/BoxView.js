@@ -8,7 +8,7 @@ class BoxView extends ElementComponent {
         const style = this.renderStyle(source.parameters.style)
 
         return (
-            <div id={source.uuid} style={style} onClick={this.handleClick}>
+            <div id={source.uuid} style={style} onClick={this.handleClick} className="element-box">
                 <ElementFrame visible={source.selected}/>
             </div>
         )
