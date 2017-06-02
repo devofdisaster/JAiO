@@ -10,9 +10,11 @@ class BodyView extends ElementComponent {
         const children = this.renderKids(source.children)
 
         return (
-            <div id={source.uuid} style={style} onClick={this.handleClick}>
-                <ElementFrame visible={source.selected}/>
-                {children}
+            <div className="page">
+                <div id={source.uuid} style={style} onClick={this.handleClick} className="element-body">
+                    <ElementFrame visible={source.selected}/>
+                    {children}
+                </div>
             </div>
         )
     }

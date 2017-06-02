@@ -1,3 +1,11 @@
-.content {
-  margin-top: 50px;
+@import "./variables";
+
+.page {
+  bottom: 0;
+  height: calc(100% - 50px);
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  width: calc(100% - #{$sidebarWidth});
 }

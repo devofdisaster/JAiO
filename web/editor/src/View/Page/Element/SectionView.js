@@ -9,7 +9,7 @@ class SectionView extends ElementComponent {
         const style = this.renderStyle(source.parameters.style)
         const children = this.renderKids(source.children)
 
-        return <div id={source.uuid} style={style} onClick={this.handleClick}>
+        return <div id={source.uuid} style={style} onClick={this.handleClick} className="element-section">
             <ElementFrame visible={source.selected}/>
             {children}
         </div>
