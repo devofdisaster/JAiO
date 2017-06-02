@@ -7,7 +7,7 @@ class LabeledTextInput extends React.Component {
             <input id={this.props.id}
                    type="text"
                    className="form-control"
-                   value={this.props.value}
+                   value={this.props.value || ''}
                    placeholder={this.props.placeholder || ''}
                    onChange={this.props.onChange}
             />
