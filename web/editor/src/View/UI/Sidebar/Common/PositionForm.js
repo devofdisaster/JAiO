@@ -1,5 +1,5 @@
 import React from 'react'
-import LabeledNumberInput from './Common/LabeledNumberInput'
+import LabeledNumberInput from './LabeledNumberInput'
 
 class PositionForm extends React.Component {
     constructor (props) {
@@ -23,15 +23,6 @@ class PositionForm extends React.Component {
 
         return <form>
             <LabeledNumberInput
-                id="elementPositionTop"
-                label="Vertical position"
-                max="699"
-                min="0"
-                onChange={this.onTopChange}
-                placeholder={top}
-                value={top}
-            />
-            <LabeledNumberInput
                 id="elementPositionLeft"
                 label="Horizontal position"
                 max="959"
@@ -39,6 +30,15 @@ class PositionForm extends React.Component {
                 onChange={this.onLeftChange}
                 placeholder={left}
                 value={left}
+            />
+            <LabeledNumberInput
+                id="elementPositionTop"
+                label="Vertical position"
+                max="699"
+                min="0"
+                onChange={this.onTopChange}
+                placeholder={top}
+                value={top}
             />
         </form>
     }
