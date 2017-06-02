@@ -3,10 +3,11 @@ import SizePanel from './Common/SizePanel'
 import PositionPanel from './Common/PositionPanel'
 import BackgroundPanel from './Common/BackgroundPanel'
 import BorderPanel from './Common/BorderPanel'
+import ActionsPanel from './Element/ActionsPanel'
 
 function ElementContent(props) {
     return <div>
-
+        <ActionsPanel source={props.source}/>
         <PositionPanel source={props.source}/>
         <SizePanel source={props.source}/>
         <BackgroundPanel source={props.source}/>

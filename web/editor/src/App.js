@@ -36,6 +36,20 @@ class Application {
         this.updateView()
     }
 
+    cloneElement(uuid) {
+        const element = this.getElementByUuid(uuid)
+
+        if (element && element.type !== 'body' && element.type !== 'section') {
+            const clone = ElementFactory.cloneElement(element.toJSON())
+
+            clone.style.set('top', parseInt(clone.style.get('top'), 10) + 10, 'px');
+            clone.style.set('left', parseInt(clone.style.get('left'), 10) + 10, 'px');
+
+            this.Page.children[0].children.push(clone)
+            this.toggleSelected(clone.uuid)
+        }
+    }
+
     getElementByUuid(uuid) {
         if (this.Page.isEqual(uuid)) {
             return this.Page
@@ -50,6 +64,16 @@ class Application {
         }
 
         return this.Page.getSelectedDescendant()
+    }
+
+    removeElement(uuid) {
+        const element = this.getElementByUuid(uuid)
+
+        if (element && element.type !== 'body' && element.type !== 'section') {
+            element.deselect()
+            this.Page.children[0].children.splice(this.Page.children.indexOf(element, 1));
+            this.updateView()
+        }
     }
 
     async savePage() {
@@ -75,7 +99,14 @@ class Application {
     }
 
     toggleSelected(uuid) {
+        /**
+         * @type Element
+         */
         const selected = this.getSelectedElement()
+
+        /**
+         * @type Element
+         */
         const element = this.getElementByUuid(uuid)
 
         if (selected) {
