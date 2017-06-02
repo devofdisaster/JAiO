@@ -7,6 +7,9 @@ import Interface from './UI/Interface'
 class Application {
     constructor (data) {
         this.initData = data
+        this.Page = null
+        this.Interface = null
+        this.viewUpdateCallback = null
     }
 
     async init() {
@@ -17,13 +20,50 @@ class Application {
         this.Interface = new Interface();
 
         ReactDOM.render(
-            <ApplicationComponent app={this} />,
+            <ApplicationComponent />,
             document.getElementById('root')
         )
     }
 
-    updateView(data) {
+    getElementByUuid(uuid) {
+        if (this.Page.isEqual(uuid)) {
+            return this.Page
+        }
 
+        return this.Page.getDescendantByUuid(uuid)
+    }
+
+    getSelectedElement() {
+        if (this.Page.isSelected()) {
+            return this.Page
+        }
+
+        return this.Page.getSelectedDescendant()
+    }
+
+    setViewUpdateCallback(func) {
+        this.viewUpdateCallback = func
+    }
+
+    toggleSelected(uuid) {
+        const selected = this.getSelectedElement()
+        const element = this.getElementByUuid(uuid)
+
+        if (selected) {
+            selected.deselect()
+        }
+
+        if (!element.isEqual(selected)) {
+            element.select()
+        }
+
+        this.updateView({ page: this.Page.toView(), ui: this.Interface.toView() })
+    }
+
+    updateView(data) {
+        if (this.viewUpdateCallback) {
+            this.viewUpdateCallback(data)
+        }
     }
 }
 

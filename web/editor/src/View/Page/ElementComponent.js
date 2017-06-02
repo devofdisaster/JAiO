@@ -4,9 +4,20 @@ import React from 'react'
 class ElementComponent extends React.Component {
     constructor(props) {
         super(props)
+
+        this.handleClick = this.handleClick.bind(this)
     }
 
-    renderStyle (styleObject = {}) {
+    handleClick(e) {
+        e.stopPropagation()
+        this.toggleSelected()
+    }
+
+    render() {
+        throw new Error('This class does not support rendering directly!')
+    }
+
+    renderStyle(styleObject = {}) {
         const style = {}
 
         for (let prop in styleObject) {
@@ -18,8 +29,8 @@ class ElementComponent extends React.Component {
         return style
     }
 
-    render () {
-        throw new Error('This class does not support rendering directly!')
+    toggleSelected() {
+        window.Application.toggleSelected(this.props.source.uuid)
     }
 }
 
