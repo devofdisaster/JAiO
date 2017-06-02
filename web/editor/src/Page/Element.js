@@ -59,8 +59,8 @@ class Element {
         return {
             uuid: this.uuid,
             type: this.type,
-            attributes: this.attributes,
-            parameters: { style: this.style },
+            attributes: this.attributes.toJSON(),
+            parameters: { style: this.style.toJSON() },
             children: this.children
         }
     }
