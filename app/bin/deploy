@@ -1,5 +1,6 @@
 #!/bin/bash
 ./composer.phar install
+npm install
 gulp
 rm -rf app/cache/*
 rm -f development.log
