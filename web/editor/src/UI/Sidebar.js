@@ -1,6 +1,14 @@
 class  Sidebar {
+    constructor () {
+        this.selected = null
+    }
+
+    setSelectedElement(element) {
+        this.selected = element
+    }
+
     toView() {
-        return {}
+        return { selected: this.selected ? this.selected.toView() : null }
     }
 }
 

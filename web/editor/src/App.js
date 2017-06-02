@@ -25,6 +25,17 @@ class Application {
         )
     }
 
+    changeElementStyle(prop, value) {
+        const element = this.getSelectedElement();
+
+        if (!element) {
+            return;
+        }
+
+        element.style.set(prop, value)
+        this.updateView()
+    }
+
     getElementByUuid(uuid) {
         if (this.Page.isEqual(uuid)) {
             return this.Page
@@ -57,12 +68,13 @@ class Application {
             element.select()
         }
 
-        this.updateView({ page: this.Page.toView(), ui: this.Interface.toView() })
+        this.Interface.setSelectedElement(element)
+        this.updateView()
     }
 
     updateView(data) {
         if (this.viewUpdateCallback) {
-            this.viewUpdateCallback(data)
+            this.viewUpdateCallback(data || { page: this.Page.toView(), ui: this.Interface.toView() })
         }
     }
 }
