@@ -2,6 +2,7 @@ import ApplicationComponent from './View/ApplicationComponent'
 import ElementFactory from './Page/ElementFactory'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Interface from './UI/Interface'
 
 class Application {
     constructor (data) {
@@ -13,8 +14,10 @@ class Application {
         const json = await response.json()
 
         this.Page = ElementFactory.buildElement(json)
+        this.Interface = new Interface();
+
         ReactDOM.render(
-            <ApplicationComponent page={this.Page.toView()} app={this} />,
+            <ApplicationComponent app={this} />,
             document.getElementById('root')
         )
     }
