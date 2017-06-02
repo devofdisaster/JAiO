@@ -8,6 +8,10 @@ class Interface {
         this.sidebar = new Sidebar()
     }
 
+    setSelectedElement(element) {
+        this.sidebar.setSelectedElement(element)
+    }
+
     toView() {
         return {
             header: this.header.toView(),

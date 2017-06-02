@@ -1,16 +1,16 @@
 import React from 'react'
+import SidebarOverlay from './Sidebar/SidebarOverlay'
+import SidebarContent from './Sidebar/SidebarContent'
 
 class SidebarComponent extends React.Component {
-
-    constructor (props) {
-        super(props)
-
-        this.props = props
-    }
-
     render() {
         return (
             <div className="sidebar">
+                {
+                    this.props.source.selected ?
+                    <SidebarContent source={this.props.source.selected}/> :
+                    <SidebarOverlay/>
+                }
             </div>
         )
     }
