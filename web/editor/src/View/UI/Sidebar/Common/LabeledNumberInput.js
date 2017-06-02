@@ -12,6 +12,7 @@ class LabeledNumberInput extends React.Component {
                    value={this.props.value}
                    placeholder={this.props.placeholder || ''}
                    onChange={this.props.onChange}
+                   disabled={this.props.disabled}
             />
         </div>
     }
