@@ -7,6 +7,7 @@ class Element {
     constructor(object) {
         this.uuid = object.uuid || Uuid()
         this.type = object.type
+        this.value = object.value
         this.attributes = new Attributes(object.attributes)
         this.style = new Style(object.parameters.style)
         this.children = []
@@ -21,6 +22,10 @@ class Element {
                 }
             }
         }
+    }
+
+    changeValueTo(value) {
+        this.value = value
     }
 
     deselect() {
@@ -59,6 +64,7 @@ class Element {
         return {
             uuid: this.uuid,
             type: this.type,
+            value: this.value,
             attributes: this.attributes.toJSON(),
             parameters: { style: this.style.toJSON() },
             children: this.children
@@ -69,6 +75,7 @@ class Element {
         return {
             uuid: this.uuid,
             type: this.type,
+            value: this.value,
             attributes: this.attributes.toView(),
             parameters: { style: this.style.toView() },
             children: this.children.map((child) => child.toView()),

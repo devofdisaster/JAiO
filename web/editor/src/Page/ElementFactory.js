@@ -1,13 +1,15 @@
 import Body from './Element/Body'
 import Box from './Element/Box'
 import Section from './Element/Section'
+import Text from './Element/Text'
 import NewElements from './NewElements'
 import Uuid from 'uuid'
 
 const mapping = {
     'body': Body,
     'box': Box,
-    'section': Section
+    'section': Section,
+    'text': Text
 }
 
 class ElementFactory {

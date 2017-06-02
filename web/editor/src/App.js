@@ -73,6 +73,15 @@ class Application {
         this.updateView()
     }
 
+    changeTextElementValue(value) {
+        const element = this.getSelectedElement()
+
+        if (element && element.type === 'text') {
+            element.changeValueTo(value)
+            this.changeElementStyle('height', 'auto')
+        }
+    }
+
     cloneElement(uuid) {
         const element = this.getElementByUuid(uuid)
 
@@ -103,7 +112,7 @@ class Application {
         return this.Page.getSelectedDescendant()
     }
 
-    moveElement(uuid, parentUuid, coords) {
+    moveElement(parentUuid, coords) {
         const position = this.calculateNewElementPosition(parentUuid, coords)
 
         this.changeElementStyles(position)

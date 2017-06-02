@@ -23,6 +23,7 @@ class HeaderComponent extends React.Component {
                 <div className="row">
                     <div className="col-sm-4">
                         <NewElement type="box"/>
+                        <NewElement type="text"/>
                     </div>
                     <div className="col-sm-1 col-sm-offset-7 text-center">
                         <btn className={classes} onClick={this.handleClick}>
