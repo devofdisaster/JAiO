@@ -11,11 +11,11 @@ abstract class Element
     /**
      * @var \Ramsey\Uuid\UuidInterface
      */
-    private $uuid;
-    private $type;
-    private $attributes;
-    private $parameters;
-    private $children = [];
+    protected $uuid;
+    protected $type;
+    protected $attributes;
+    protected $parameters;
+    protected $children = [];
 
     public function __construct(\stdClass $element, Page $page = null)
     {

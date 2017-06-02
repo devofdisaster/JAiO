@@ -1,9 +1,11 @@
 import Body from './Element/Body'
 import Box from './Element/Box'
+import Section from './Element/Section'
 
 const mapping = {
     'body': Body,
-    'box': Box
+    'box': Box,
+    'section': Section
 }
 
 class ElementFactory {
