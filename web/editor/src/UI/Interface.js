@@ -12,6 +12,10 @@ class Interface {
         this.sidebar.setSelectedElement(element)
     }
 
+    toggleSpinOnSave() {
+        this.header.saving = !this.header.saving;
+    }
+
     toView() {
         return {
             header: this.header.toView(),

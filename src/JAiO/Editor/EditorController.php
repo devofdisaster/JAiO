@@ -7,6 +7,7 @@ use JAiO\Config;
 use JAiO\Domain\Page;
 use JAiO\Repository\PageRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EditorController
@@ -30,8 +31,21 @@ class EditorController
         return $this->render($this->getPageByUuid($uuid));
     }
 
-    public function pageJsonAction($uuid) : Response
+    public function pageJsonAction($uuid, Request $request) : Response
     {
+        if ($request->isMethod('post')) {
+            if ($json = $request->request->get('json')) {
+                try {
+                    $page = $this->getPageByUuid($uuid);
+                    $page->setContent($json);
+
+                    $this->getEM()->flush();
+                } catch (\Exception $e) {
+                    return $this->app->json([$e->getMessage()], 500);
+                }
+            }
+        }
+
         return JsonResponse::fromJsonString($this->getPageByUuid($uuid)->getContent());
     }
 

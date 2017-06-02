@@ -1,6 +1,10 @@
 class Header {
+    constructor () {
+        this.saving = false;
+    }
+
     toView() {
-        return {}
+        return { saving: this.saving }
     }
 }
 

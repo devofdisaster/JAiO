@@ -6,6 +6,7 @@ import BorderPanel from './Common/BorderPanel'
 
 function ElementContent(props) {
     return <div>
+
         <PositionPanel source={props.source}/>
         <SizePanel source={props.source}/>
         <BackgroundPanel source={props.source}/>

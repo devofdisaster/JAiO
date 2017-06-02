@@ -52,6 +52,24 @@ class Application {
         return this.Page.getSelectedDescendant()
     }
 
+    async savePage() {
+        this.Interface.toggleSpinOnSave()
+        this.updateView()
+
+        const data = new FormData();
+        data.append('json', JSON.stringify(this.Page));
+
+        const response = await fetch(`/page/${this.initData.uuid}`, {
+            method: 'POST',
+            body: data
+        })
+
+        if (response.statusText === 'OK') {
+            this.Interface.toggleSpinOnSave()
+            this.updateView()
+        }
+    }
+
     setViewUpdateCallback(func) {
         this.viewUpdateCallback = func
     }
