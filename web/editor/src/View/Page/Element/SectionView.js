@@ -21,11 +21,7 @@ class SectionView extends ElementComponent {
                 if (type) {
                     window.Application.addNewElement(this.props.source.uuid, type, ui.offset)
                 } else {
-                    window.Application.moveElement(
-                        ui.draggable[0].getAttribute('id'),
-                        this.props.source.uuid,
-                        ui.offset
-                    )
+                    window.Application.moveElement(this.props.source.uuid, ui.offset)
                 }
             }
         })

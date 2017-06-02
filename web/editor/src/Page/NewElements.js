@@ -5,6 +5,7 @@ const NewElements = {
         parameters: {
             style: {
                 'background-color': '#FF5DBA',
+                'box-sizing': 'border-box',
                 height: 100,
                 position: 'absolute',
                 width: 100
@@ -13,15 +14,21 @@ const NewElements = {
         children: []
     },
     'text': {
-        type: 'box',
-        value: 'example text',
+        type: 'text',
+        value: 'Super example text',
         attributes: {},
         parameters: {
             style: {
+                'box-sizing': 'border-box',
                 color: '#000',
-                height: 50,
+                'font-family': 'Arial',
+                'font-weight': 400,
+                'font-style': 'initial',
+                'font-size': '14px',
+                'line-height': '14px',
+                height: 'auto',
                 position: 'absolute',
-                width: 100
+                width: 200
             }
         },
         children: []
