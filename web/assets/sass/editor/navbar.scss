@@ -3,6 +3,11 @@ nav {
     padding-top: 8px
   }
 
+  .new-element {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+
   .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
