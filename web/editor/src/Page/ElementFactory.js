@@ -1,6 +1,7 @@
 import Body from './Element/Body'
 import Box from './Element/Box'
 import Section from './Element/Section'
+import NewElements from './NewElements'
 import Uuid from 'uuid'
 
 const mapping = {
@@ -23,6 +24,13 @@ class ElementFactory {
             return new mapping[object.type](object)
         }
     }
+
+    static newElement(type) {
+        if (NewElements[type] && mapping[type]) {
+            return new mapping[type](Object.assign({ uuid: Uuid() }, NewElements[type]))
+        }
+    }
+
 }
 
 export default ElementFactory

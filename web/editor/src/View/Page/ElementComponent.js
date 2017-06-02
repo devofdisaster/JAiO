@@ -8,6 +8,23 @@ class ElementComponent extends React.Component {
         this.handleClick = this.handleClick.bind(this)
     }
 
+    componentDidMount() {
+        if (this.isDraggable()) {
+            const $elem = $(this.elem);
+
+            $elem.draggable({
+                containment: $elem.parent(),
+                distance: 10,
+                revert: 'invalid',
+                start: () => window.Application.toggleSelected($elem.attr('id'), true)
+            })
+        }
+    }
+
+    isDraggable() {
+        return ['box', 'text'].indexOf(this.props.source.type) >= 0
+    }
+
     handleClick(e) {
         e.stopPropagation()
         this.toggleSelected()
