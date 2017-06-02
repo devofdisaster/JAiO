@@ -37,6 +37,7 @@ class EmptyContent implements \JsonSerializable
                             'parameters' => [
                                 'style' => [
                                     'background-color' => 'red',
+                                    'box-sizing' => 'border-box',
                                     'width' => 100,
                                     'height' => 100,
                                     'top' => 340,
@@ -52,6 +53,7 @@ class EmptyContent implements \JsonSerializable
                                 'style' => [
                                     'background-color' => 'blue',
                                     'border-radius' => 50,
+                                    'box-sizing' => 'border-box',
                                     'width' => 100,
                                     'height' => 100,
                                     'top' => 243,

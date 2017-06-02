@@ -41,6 +41,14 @@ class Page
     }
 
     /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
      * @return Body|Element
      */
     public function getBody() : Body
@@ -62,6 +70,4 @@ class Page
     {
         return $this->render();
     }
-
-
 }
