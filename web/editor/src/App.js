@@ -114,7 +114,7 @@ class Application {
 
         if (element && element.type !== 'body' && element.type !== 'section') {
             element.deselect()
-            this.Page.children[0].children.splice(this.Page.children.indexOf(element, 1));
+            this.Page.children[0].children.splice(this.Page.children[0].children.indexOf(element), 1);
             this.updateView()
         }
     }
