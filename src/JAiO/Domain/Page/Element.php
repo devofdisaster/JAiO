@@ -12,6 +12,7 @@ abstract class Element
      * @var \Ramsey\Uuid\UuidInterface
      */
     protected $uuid;
+    protected $value;
     protected $type;
     protected $attributes;
     protected $parameters;
@@ -21,6 +22,7 @@ abstract class Element
     {
         $this->uuid = isset($element->uuid) ? Uuid::fromString($element->uuid) : Uuid::uuid1();
         $this->type = $element->type;
+        $this->value = isset($element->value) ? $element->value : null;
         $this->attributes = $element->attributes;
         $this->parameters = $element->parameters;
         $this->page = $page;
