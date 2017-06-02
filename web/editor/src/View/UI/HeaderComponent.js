@@ -1,13 +1,6 @@
 import React from 'react'
 
 class HeaderComponent extends React.Component {
-
-    constructor (props) {
-        super(props)
-
-        this.props = props
-    }
-
     render() {
         return <nav className="navbar navbar-default navbar-fixed-top">
             <div className="container">
