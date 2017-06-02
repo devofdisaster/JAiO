@@ -1,0 +1,15 @@
+.element-frame {
+  border: 1px solid blue;
+  box-sizing: border-box;
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  height: calc(100% + 2px);
+  width: calc(100% + 2px);
+
+  &.visible {
+    display: block;
+  }
+}

@@ -10,6 +10,7 @@ class Element {
         this.attributes = new Attributes(object.attributes)
         this.style = new Style(object.parameters.style)
         this.children = []
+        this.selected = !!object.selected
 
         if (object.children && object.children.length) {
             for (const childObject of object.children) {
@@ -20,6 +21,38 @@ class Element {
                 }
             }
         }
+    }
+
+    deselect() {
+        this.selected = false
+    }
+
+    getDescendantByUuid(uuid) {
+        return this.children.reduce((carry, current) => {
+            return carry || (current.isEqual(uuid) ? current : current.getDescendantByUuid(uuid))
+        }, null)
+    }
+
+    getSelectedDescendant() {
+        return this.children.reduce((carry, current) => {
+            return carry || (current.isSelected() ? current : current.getSelectedDescendant())
+        }, null)
+    }
+
+    isEqual(element) {
+        if (typeof element === 'string') {
+            return element === this.uuid
+        }
+
+        return element === this
+    }
+
+    isSelected() {
+        return !!this.selected
+    }
+
+    select() {
+        this.selected = true
     }
 
     toJSON() {
@@ -38,7 +71,8 @@ class Element {
             type: this.type,
             attributes: this.attributes.toView(),
             parameters: { style: this.style.toView() },
-            children: this.children.map((child) => child.toView())
+            children: this.children.map((child) => child.toView()),
+            selected: this.selected
         }
     }
 

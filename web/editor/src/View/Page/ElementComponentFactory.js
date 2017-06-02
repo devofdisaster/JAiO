@@ -1,10 +1,10 @@
-import Box from './Element/Box'
+import BoxView from './Element/BoxView'
 import React from 'react'
 
 function ElementComponentFactory(object) {
     switch (object.type) {
         case 'box':
-            return <Box key={object.uuid} source={object}/>
+            return <BoxView key={object.uuid} source={object}/>
     }
 }
 
