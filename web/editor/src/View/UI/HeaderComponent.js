@@ -23,9 +23,9 @@ class HeaderComponent extends React.Component {
                     <div className="col-sm-1 col-sm-offset-11 text-center">
                         <btn className={classes} onClick={this.handleClick}>
                             { this.props.source.saving ?
-                                <i className="glyphicon glyphicon-spin glyphicon-refresh"/> :
-                                'Save'
-                            }
+                                <i className="glyphicon glyphicon-spin glyphicon-repeat"/> :
+                                <i className="glyphicon glyphicon-floppy-disk"/>
+                            } Save
                         </btn>
                     </div>
                 </div>
