@@ -12,6 +12,27 @@ class Application {
         this.viewUpdateCallback = null
     }
 
+    addNewElement(parentUuid, type, coords) {
+        const parent = this.getElementByUuid(parentUuid)
+        const element = ElementFactory.newElement(type)
+        const position = this.calculateNewElementPosition(parentUuid, coords)
+
+        element.style.set('top', parseInt(position.top, 10));
+        element.style.set('left', parseInt(position.left, 10));
+
+        parent.children.push(element)
+        this.toggleSelected(element.uuid)
+    }
+
+    calculateNewElementPosition(parentUuid, coords) {
+        const parentOffset = $(`#${parentUuid}`).offset()
+
+        return {
+            top: coords.top - parentOffset.top,
+            left: coords.left - parentOffset.left
+        }
+    }
+
     async init() {
         const response = await fetch(`/page/${this.initData.uuid}`)
         const json = await response.json()
@@ -33,6 +54,22 @@ class Application {
         }
 
         element.style.set(prop, value)
+        this.updateView()
+    }
+
+    changeElementStyles(obj) {
+        const element = this.getSelectedElement();
+
+        if (!element) {
+            return;
+        }
+
+        for (let prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                element.style.set(prop, obj[prop])
+            }
+        }
+
         this.updateView()
     }
 
@@ -64,6 +101,12 @@ class Application {
         }
 
         return this.Page.getSelectedDescendant()
+    }
+
+    moveElement(uuid, parentUuid, coords) {
+        const position = this.calculateNewElementPosition(parentUuid, coords)
+
+        this.changeElementStyles(position)
     }
 
     removeElement(uuid) {
@@ -98,7 +141,7 @@ class Application {
         this.viewUpdateCallback = func
     }
 
-    toggleSelected(uuid) {
+    toggleSelected(uuid, select) {
         /**
          * @type Element
          */
@@ -113,7 +156,7 @@ class Application {
             selected.deselect()
         }
 
-        if (!element.isEqual(selected)) {
+        if (!element.isEqual(selected) || select) {
             element.select()
         }
 
